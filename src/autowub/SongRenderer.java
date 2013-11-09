@@ -1,25 +1,33 @@
 package autowub;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
+import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Receiver;
+import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
 public class SongRenderer {
-	Synthesizer synth;
+	Sequencer seq;
 	public SongRenderer() throws MidiUnavailableException{
-		synth = MidiSystem.getSynthesizer();
+		seq = MidiSystem.getSequencer();
 	}
 	
-	private ArrayList<ShortMessage> processTrack(Track t, int chan, int beatNote, int bpm){
-		ArrayList<ShortMessage> notes = new ArrayList<ShortMessage>();
+	private HashMap<ShortMessage, Long> processTrack(Track t, int chan, Song s) throws InvalidMidiDataException{
+		HashMap<ShortMessage, Long> notes = new HashMap<ShortMessage, Long>();
 		for(Note note : t.notes){
-			ShortMessage sm = new ShortMessage();
-//			sm.setMessage(ShortMessage.NOTE_ON,	chan, data1, data2);
-//			notes.add()
+			ShortMessage on = new ShortMessage();
+			on.setMessage(ShortMessage.NOTE_ON, chan, note.asMidi(), note.velocity);
+			notes.put(on, getNoteTimeStamp(note));
+			ShortMessage off = new ShortMessage();
+			off.setMessage(ShortMessage.NOTE_OFF, chan, note.asMidi(), note.velocity);
+			notes.put(off, getNoteTimeStamp(note));
+			
 		}
 		return notes;
 	}
@@ -30,8 +38,20 @@ public class SongRenderer {
 	
 	
 	public void play(Song s) throws MidiUnavailableException{
-		Receiver rcv = synth.getReceiver();
-//		ArrayList<ShortMessage> midiNotes = processTrack(s.soprano);
-		
+		seq.stop();
+		seq.setMicrosecondPosition(0);
+		seq.setTempoInBPM(s.bpm);
+		for(int i = 0; i < s.tracks.length; i++){
+			HashMap<ShortMessage, Long> processed = new HashMap<ShortMessage, Long>();
+			try {
+				processed = processTrack(s.tracks[i], i, s );
+				for(Entry<ShortMessage, Long> entry : processed.entrySet()){
+					rcv.send(entry.getKey(), 100+entry.getValue());;
+				}
+			} catch (InvalidMidiDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
