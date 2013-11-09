@@ -15,5 +15,18 @@ public class Note {
 		this.dotted = dotted;
 	}
 	
+	public double noteLength(){
+		return 0;
+	}
+	
+	public int asMidi(){
+		for (int i = 0; i < noteToMIDI.length; i++){
+			if(noteToMIDI[i] == pitch){
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	
 }
