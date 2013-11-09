@@ -1,3 +1,5 @@
+package autowub;
+
 import java.util.Random;
 
 public class Verse {

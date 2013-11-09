@@ -7,11 +7,8 @@ public class Main {
 	public static void main(String[] args){
 		try {
 			SongRenderer sr = new SongRenderer();
-			sr.play(new Song());
+//			sr.play(new Song());
 		} catch (MidiUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
