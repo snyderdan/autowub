@@ -128,7 +128,7 @@ public class SongChanger
 	
 	public void createNewSong(Song song)
 	{
-		song.bpm = (float)values[0];
+		song.bpm = (int) values[0];
 		song.soprano = values[1];
 		song.alto = values[2];
 		song.tenor = values[3];

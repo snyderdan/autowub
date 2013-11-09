@@ -32,6 +32,9 @@ public class Song {
 	public int bpm;
 	int beatNote;
 	
+	//arbitrary doubles to change song elements (to be given meaning soon), will probably change
+	public double bass, tenor, alto, soprano;
+	
 	Song(NoteTrack[] tracks, int bpm, int beatNote){
 		this.tracks = tracks;
 		this.bpm = bpm;
