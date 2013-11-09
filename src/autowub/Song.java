@@ -37,7 +37,7 @@ public class Song {
 		this.bpm = bpm;
 		this.beatNote = beatNote;
 	}
-	
+
 	Sequence getSequence() {
 		Sequence s = null;
 		try {

@@ -47,7 +47,7 @@ public class Note {
 	
 	/**
 	 * 
-	 * @return number of 16th notes
+	 * @return number of 32nd notes
 	 */
 	public int noteLength(){
 		int base = (dotted ? 3: 2);
