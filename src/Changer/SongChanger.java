@@ -12,7 +12,7 @@ public class SongChanger
 	
 	public void recieveSong(Song song)
 	{
-		values[0] = song.bpm;
+		values[0] = (double)song.bpm;
 		values[1] = song.soprano;
 		values[2] = song.alto;
 		values[3] = song.tenor;
@@ -99,6 +99,31 @@ public class SongChanger
 				}
 			}
 		}
+	}
+	
+	public void changeTempo(double change)
+	{
+		values[0] = values[0] * change;
+	}
+	
+	public void changeSoprano(double change)
+	{
+		values[1] = values[1] * change;
+	}
+	
+	public void changeAlto(double change)
+	{
+		values[2] = values[2] * change;
+	}
+	
+	public void changeTenor(double change)
+	{
+		values[3] = values[3] * change;
+	}
+	
+	public void changeBass(double change)
+	{
+		values[4] = values[4] * change;
 	}
 	
 	public void createNewSong(Song song)
