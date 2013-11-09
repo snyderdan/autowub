@@ -5,14 +5,16 @@ public class Note {
 	static String[] noteToMIDI= {"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
 	
 	
-	NoteType nt;
-	String pitch;
-	boolean dotted;
+	final NoteType nt;
+	final String pitch;
+	final boolean dotted;
+	final int velocity;
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity){
 		nt = type;
 		this.pitch = pitch;
 		this.dotted = dotted;
+		this.velocity = velocity;
 	}
 	
 	/**
