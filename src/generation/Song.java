@@ -1,3 +1,5 @@
+package generation;
+
 import javax.sound.midi.*;
 
 import java.util.Random;

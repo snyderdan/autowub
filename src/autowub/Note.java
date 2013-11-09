@@ -2,8 +2,6 @@ package autowub;
 
 
 public class Note {
-	static String[] noteToMIDI= {"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
-	
 	
 	final NoteType nt;
 	final String pitch;
@@ -40,7 +38,7 @@ public class Note {
 	}
 	
 	public int asMidi(){
-		for (int i = 0; i < noteToMIDI.length; i++){
+		for (int i = 0; i < Song.keys.length; i++){
 			if(noteToMIDI[i] == pitch){
 				return i;
 			}

@@ -1,3 +1,5 @@
+package generation;
+
 import java.util.Random;
 
 public class Verse {
