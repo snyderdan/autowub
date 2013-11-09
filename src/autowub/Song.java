@@ -61,17 +61,6 @@ public class Song {
 	
 	public static void main(String[] args){
 		Song wub = new Song();
-//		try{
-//			Synthesizer synth = MidiSystem.getSynthesizer();
-//			synth.open();
-//			MidiChannel channel = synth.getChannels()[0];
-//			
-//			channel.noteOn(note, 50);
-//			channel.noteOn(76, 50);
-//			channel.noteOn(79, 50);
-//		} catch(MidiUnavailableException e){
-//			e.printStackTrace();
-//		}
 		wub.play();
 	}
 	
@@ -111,12 +100,7 @@ public class Song {
 							chords[j][k] = sharpOrder[a];
 						}
 					}
-					//System.out.println(chords[j][k]);
 				}
-//				for(int k=0; k<chords[j].length; k++){
-//					System.out.print(chords[j][k]);
-//				}
-//				System.out.println("\n");
 			}
 		}else{
 			int flatCount = 0;
@@ -150,11 +134,10 @@ public class Song {
 						}
 					}
 				}
-//				for(int k=0; k<chords[j].length; k++){
-//					System.out.print(chords[j][k]);
-//				}
-//				System.out.println("\n");
 			}
+		}
+		for(int i=0; i<chordTones.length; i++){
+			chordTones[i] = chords[i][0];
 		}
 		for(int i=0; i<chords.length; i++){
 			for(int j=0; j<chords[i].length; j++){
@@ -164,83 +147,27 @@ public class Song {
 		}
 	}
 	
-//	public Song(){
-//		pickKey();
-//		System.out.println("Key: " + key);
-//		int natIndex = 0;
-//		//System.out.println(keys[keyIndex].substring(0, 1));
-//		for(int i = 0; i<natKeys.length; i++){
-//			if(natKeys[i].equals(keys[keyIndex].substring(0, 1))){
-//				natIndex = i;
-//				break;
-//			}
-//		}
-//		for(int j=0; j<chords.length; j++){
-//			if(natIndex+j<natKeys.length){
-//				chords[j][0] = natKeys[natIndex+j];
-//			}else{
-//				chords[j][0] = natKeys[natIndex+j-natKeys.length];
-//			}
-//			if(natIndex+2+j<natKeys.length){
-//				chords[j][1] = natKeys[natIndex+2+j];
-//			}else if(natIndex+2+j<natKeys.length*2){
-//				chords[j][1] = natKeys[natIndex+2+j-natKeys.length];
-//			}else{
-//				chords[j][1] = natKeys[natIndex+j-natKeys.length];
-//			}
-//			if(natIndex+4+j<natKeys.length){
-//				chords[j][2] = natKeys[natIndex+4+j];
-//			}else if(natIndex+4+j<natKeys.length*2){
-//				chords[j][2] = natKeys[natIndex+4+j-natKeys.length];
-//			}else{
-//				chords[j][2] = natKeys[natIndex+4+j-(natKeys.length*2)];
-//			}
-//		}
-//		int accCount = -1;
-//		for(int a = 0; a<sharpNum.length; a++){
-//			if(key.equals(sharpNum[a])){
-//				accCount = a;
-//				for(int b = 0; b<accCount; b++){
-//					for(int c = 0; c<chords.length; c++){
-//						for(int d = 0; d<chords[c].length; d++){
-//							if(chords[c][d].equals(sharpOrder[b].substring(0, 1))){
-//								chords[c][d] = sharpOrder[b];
-//							}
-//						}
-//					}
-//				}
-//				break;
-//			}
-//		}
-//		if(accCount<0){
-//			for(int e=0; e<flatNum.length; e++){
-//				if(key.equals(flatNum[e])){
-//					accCount = e;
-//					for(int f = 0; f<accCount; f++){
-//						for(int g = 0; g<chords.length; g++){
-//							for(int h = 0; h<chords[g].length; h++){
-//								if(chords[g][h].equals(flatOrder[f].substring(0, 1))){
-//									chords[g][h] = flatOrder[f];
-//								}
-//							}
-//						}
-//					}
-//					break;
-//				}
-//			}
-//		}
-//		for(int j=0; j<chords.length; j++){
-//			for(int k=0; k<chords[j].length;k++){
-//				System.out.print(chords[j][k]);
-//			}
-//			System.out.print("\n");
-//		}
-//		System.out.println("Chord Tones: ");
-//		for(int k=0; k<chords.length; k++){
-//			chordTones[k] = chords[k][0];
-//			System.out.println(chordTones[k]);
-//		}
-//	}
+	public static int getKeyIndex(String note){
+		int index = -1;
+		for(int i = 0; i<chordTones.length; i++){
+			if(note.equals(chordTones[i])){
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+	
+	public static int getNatIndex(String note){
+		int index = -1;
+		for(int i = 0; i<natKeys.length; i++){
+			if(note.equals(natKeys[i])){
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
 	
 	public void pickKey(){
 		Random randy = new Random();
