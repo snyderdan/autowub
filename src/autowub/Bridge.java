@@ -1,4 +1,4 @@
-package generation;
+package autowub;
 
 
 public class Bridge {
