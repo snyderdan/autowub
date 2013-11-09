@@ -9,7 +9,13 @@ public class Song {
 	public float bpm;
 	public double soprano, alto, tenor, bass; 
 	int beatNote;
-
+	
+	Song(NoteTrack[] tracks, int bpm, int beatNote){
+		this.tracks = tracks;
+		this.bpm = bpm;
+		this.beatNote = beatNote;
+	}
+	
 	Sequence getSequence() {
 		Sequence s = null;
 		try {
