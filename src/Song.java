@@ -9,23 +9,23 @@ public class Song {
 	Ending ending = new Ending();
 	static String[] keys = new String[]{"c","c#","d","d#","e","f","f#","g","g#","a","a#","b"};
 	static String[] natKeys = new String[]{"c","d","e","f","g","a","b"};
-	static String[] sharpOrder = new String[]{"c","g","d","a","e","b","f#","c#"};
-	static String[] flatOrder = new String[]{"f","a#","d#","g#"};
+	static String[] sharpNum = new String[]{"c","g","d","a","e","b","f#","c#"};
+	static String[] flatNum = new String[]{"c","f","a#","d#","g#"};
+	static String[]	sharpOrder = new String[]{"f#","c#","g#","d#","a#","e#","b#"};
+	static String[]	flatOrder = new String[]{"a#","d#","g#","d#"};
 	String key;
 	int keyIndex;
 	String[][] chords = new String[7][3];
-	String I[] = new String[3];
-	String ii[] = new String[3];
-	String iii[] = new String[3];
-	String IV[] = new String[3];
-	String V[] = new String[3];
-	String vi[] = new String[3];
-	String vii[] = new String[3];
+//	String I[] = new String[3];
+//	String ii[] = new String[3];
+//	String iii[] = new String[3];
+//	String IV[] = new String[3];
+//	String V[] = new String[3];
+//	String vi[] = new String[3];
+//	String vii[] = new String[3];
 	
 	public static void main(String[] args){
 		Song wub = new Song();
-//		int[] notes;
-//		int note = 72;
 //		try{
 //			Synthesizer synth = MidiSystem.getSynthesizer();
 //			synth.open();
@@ -42,7 +42,7 @@ public class Song {
 	
 	public Song(){
 		pickKey();
-		System.out.println(key);
+		System.out.println("Key: " + key);
 		int natIndex = 0;
 		//System.out.println(keys[keyIndex].substring(0, 1));
 		for(int i = 0; i<natKeys.length; i++){
@@ -57,7 +57,6 @@ public class Song {
 			}else{
 				chords[j][0] = natKeys[natIndex+j-natKeys.length];
 			}
-			//chords[j][0] = natKeys[natIndex+j];
 			if(natIndex+2+j<natKeys.length){
 				chords[j][1] = natKeys[natIndex+2+j];
 			}else if(natIndex+2+j<natKeys.length*2){
@@ -72,23 +71,47 @@ public class Song {
 			}else{
 				chords[j][2] = natKeys[natIndex+4+j-(natKeys.length*2)];
 			}
+		}
+		int accCount = -1;
+		for(int a = 0; a<sharpNum.length; a++){
+			if(key.equals(sharpNum[a])){
+				accCount = a;
+				for(int b = 0; b<accCount; b++){
+					for(int c = 0; c<chords.length; c++){
+						for(int d = 0; d<chords[c].length; d++){
+							if(chords[c][d].equals(sharpOrder[b].substring(0, 1))){
+								chords[c][d] = sharpOrder[b];
+							}
+						}
+					}
+				}
+				break;
+			}
+		}
+		if(accCount<0){
+			for(int e=0; e<flatNum.length; e++){
+				if(key.equals(flatNum[e])){
+					accCount = e;
+					for(int f = 0; f<accCount; f++){
+						for(int g = 0; g<chords.length; g++){
+							for(int h = 0; h<chords[g].length; h++){
+								if(chords[g][h].equals(flatOrder[f].substring(0, 1))){
+									chords[g][h] = flatOrder[f];
+								}
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+		for(int j=0; j<chords.length; j++){
 			for(int k=0; k<chords[j].length;k++){
 				System.out.print(chords[j][k]);
 			}
 			System.out.print("\n");
 		}
-//		for(int i=0; i<chords.length; i++){
-//			if(keyIndex+i<keys.length){
-//				chords[i][0] = keys[keyIndex+i];
-//			}else{
-//				
-//			}
-//			chords[i][1] = keys[keyIndex+4+i];
-//			chords[i][2] = keys[keyIndex+7+i];
-////			for(int j=0; j<chords[i].length; j++){
-////				chords[i][j] =  
-////			}
-//		}
+
 	}
 	
 	public void pickKey(){
@@ -98,6 +121,7 @@ public class Song {
 	}
 	
 	public void play(){
+		verse.create(key, keyIndex);
 		verse.play();
 		chorus.play();
 		verse.play();
