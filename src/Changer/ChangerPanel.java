@@ -83,6 +83,7 @@ public class ChangerPanel extends JPanel
 				SChanger.changeTenor(Integer.parseInt(tenorPercent.getText()) / 100);
 			if(bassChanged)
 				SChanger.changeBass(Integer.parseInt(bassPercent.getText()) / 100);
+			ChangerPanel.this.setVisible(false);
 		}
 	}
 	
