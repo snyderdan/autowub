@@ -9,6 +9,7 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
 public class SongRenderer {
+	Song song = new Song();
 	Synthesizer synth;
 	public SongRenderer() throws MidiUnavailableException{
 		synth = MidiSystem.getSynthesizer();
@@ -24,8 +25,13 @@ public class SongRenderer {
 		return notes;
 	}
 	
+	/*
+	 * @return elapsed time for set amount of beats
+	 */
 	private long getNoteTimeStamp(Note n){
-		return 0;
+		//5 just random number
+		long timeStamp = song.beatNum() * 5;
+		return timeStamp;
 	}
 	
 	
