@@ -11,6 +11,7 @@ public class Verse {
 	ArrayList<Double> trackRhythm = new ArrayList<Double>();
 	ArrayList<Boolean> sopFlow = new ArrayList<Boolean>();
 	boolean trueOrFalse[] = new boolean[]{true,false};
+	String[][] chordProg;
 	Note sopranoLine[];
 	Note bassLine[];
 	Note altoLine[];
@@ -24,6 +25,7 @@ public class Verse {
 		keyIndex = pKeyIndex;
 		createRhythm();
 		createSoprano();
+		createChords();
 	}
 	
 	public void createRhythm(){
@@ -42,6 +44,20 @@ public class Verse {
 				beatsLeft = beatsLeft - noteDur;
 			}
 		}
+	}
+	
+	public void createChords(){
+		chordProg = new String[trackRhythm.size()][3];
+		chordProg[0] = Song.chords[0];
+		for(int i = 0; i<chordProg.length; i++){
+			chordProg[i] = pickChord();
+		}
+	}
+	
+	public String[] pickChord(){
+		String chord[] = {"c","e","g"};
+		
+		return chord;
 	}
 	
 	public void createSoprano(){
