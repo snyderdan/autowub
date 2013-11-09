@@ -7,13 +7,23 @@ public class Note {
 	final String pitch;
 	final boolean dotted;
 	final int velocity;
-	final int octave = 0;
+	final int octave;
+	final static int defaultOctave = 4;
 	
-	public Note(NoteType type, String pitch, boolean dotted, int velocity){
+	public Note(NoteType type, String pitch, boolean dotted, int velocity, int octave){
 		nt = type;
 		this.pitch = pitch;
 		this.dotted = dotted;
 		this.velocity = velocity;
+		this.octave = octave;
+	}
+	
+	public Note(double noteLength, String pitch, boolean dotted, int velocity, int octave){
+		this(fromLength(noteLength), pitch, dotted, velocity, octave);
+	}
+	
+	public Note(NoteType type, String pitch, boolean dotted, int velocity){
+		this(type, pitch, dotted, velocity, defaultOctave);
 	}
 	
 	public Note(double noteLength, String pitch, boolean dotted, int velocity){
