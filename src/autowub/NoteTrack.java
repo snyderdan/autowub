@@ -6,7 +6,11 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
 public class NoteTrack {
-	Note[] notes;
+	final Note[] notes;
+	
+	public NoteTrack(Note[] notes){
+		this.notes = notes;
+	}
 	
 	public void fillMIDITrack(Track t, int channel) throws InvalidMidiDataException{
 		long timestamp = 0;

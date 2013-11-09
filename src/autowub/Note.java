@@ -8,7 +8,7 @@ public class Note {
 	final boolean dotted;
 	final int velocity;
 	final int octave;
-	final static int defaultOctave = 4;
+	final static int defaultOctave = 5;
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity, int octave){
 		nt = type;
@@ -70,7 +70,7 @@ public class Note {
 	public int asMidi(){
 		for (int i = 0; i < Song.keys.length; i++){
 			if(Song.keys[i] == pitch){
-				return i;
+				return i + 11*octave;
 			}
 		}
 		return -1;
