@@ -1,25 +1,30 @@
 package autowub;
 
+import java.util.ArrayList;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 
 public class SongRenderer {
-	Sequencer seq;
+	Sequencer seqencer;
 	public SongRenderer() throws MidiUnavailableException{
-		seq = MidiSystem.getSequencer();
+		seqencer = MidiSystem.getSequencer();
 	}
 	
-	public void play(Song s) throws MidiUnavailableException, InvalidMidiDataException{
-		if(!seq.isOpen()){
-			seq.open();
+	public long play(Song s) throws MidiUnavailableException, InvalidMidiDataException{
+		if(!seqencer.isOpen()){
+			seqencer.open();
 		}
-		seq.stop();
-		seq.setMicrosecondPosition(0);
-		seq.setTempoInBPM(s.bpm);
-		seq.setSequence(s.getSequence());
-		seq.start();
+		seqencer.stop();
+		seqencer.setMicrosecondPosition(0);
+		seqencer.setTempoInBPM(s.bpm);
+		Sequence seq = s.getSequence();
+		seqencer.setSequence(seq);
+		seqencer.start();
+		return seq.getTracks()[0].ticks();
 	}
+	
 }
