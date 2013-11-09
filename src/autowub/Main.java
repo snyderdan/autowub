@@ -8,17 +8,21 @@ public class Main {
 		try {
 			SongRenderer sr = new SongRenderer();
 			Note[] testTrack = {
-						new Note(NoteType.QUARTER, "c", false, 50),
-						new Note(NoteType.QUARTER, "c", false, 50),
-						new Note(NoteType.QUARTER, "c", false, 50),
-						new Note(NoteType.QUARTER, "c", false, 50),
-						new Note(NoteType.QUARTER, "c", false, 50),
-						new Note(NoteType.QUARTER, "c", false, 50)
+						new Note(NoteType.QUARTER, "c", false, 90),
+						new Note(NoteType.QUARTER, "d", false, 90),
+						new Note(NoteType.QUARTER, "e", false, 90),
+						new Note(NoteType.QUARTER, "f", false, 90),
+						new Note(NoteType.QUARTER, "g", false, 90),
+						new Note(NoteType.QUARTER, "a", false, 90),
+						new Note(NoteType.QUARTER, "b", false, 90),
+						new Note(NoteType.QUARTER, "c", false, 90)
 					};
 			NoteTrack test = new NoteTrack(testTrack);
-			Song s = new Song(new NoteTrack[] {test}, 60, 4);
+			Song s = new Song(new NoteTrack[] {test}, 120, 4);
 			System.out.println("Playing, len = " + sr.play(s));
-			while(sr.seqencer.isRunning());
+			while(sr.seqencer.isRunning()){
+				sr.seqencer.getMicrosecondPosition();
+			}
 			sr.seqencer.close();
 			System.out.println("Done");
 		} catch (MidiUnavailableException e) {
