@@ -7,12 +7,32 @@ public class Note {
 	final String pitch;
 	final boolean dotted;
 	final int velocity;
+	final int octave = 0;
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity){
 		nt = type;
 		this.pitch = pitch;
 		this.dotted = dotted;
 		this.velocity = velocity;
+	}
+	
+	public Note(double noteLength, String pitch, boolean dotted, int velocity){
+		this(fromLength(noteLength),pitch, dotted, velocity);
+	}
+	
+	
+	public static NoteType fromLength(double length){
+		if(length >= 1){
+			return NoteType.WHOLE;
+		}else if(length >= .5){
+			return NoteType.HALF;
+		}else if(length >= .25){
+			return NoteType.QUARTER;
+		}else if(length >= .125){
+			return NoteType.EIGTH;
+		}else{
+			return NoteType.SIXTEENTH;
+		}
 	}
 	
 	/**
