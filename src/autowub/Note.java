@@ -8,8 +8,8 @@ public class Note {
 	final boolean dotted;
 	final int velocity;
 	final int octave;
-	final static int defaultOctave = 5;
-	final static int defaultVelocity = 90;
+	final static int defaultOctave = 7;
+	final static int defaultVelocity = 95;
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity, int octave){
 		nt = type;

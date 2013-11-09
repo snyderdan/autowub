@@ -30,19 +30,18 @@ public class Song {
 	
 	NoteTrack[] tracks = new NoteTrack[4];
 	public int bpm;
-	int beatNote;
 	
-	Song(NoteTrack[] tracks, int bpm, int beatNote){
+	Song(NoteTrack[] tracks, int bpm){
 		this.tracks = tracks;
 		this.bpm = bpm;
-		this.beatNote = beatNote;
 	}
 
 	Sequence getSequence() {
 		Sequence s = null;
 		try {
-			s = new Sequence(Sequence.PPQ, 4);
+			s = new Sequence(Sequence.PPQ, 8);
 			Track t = s.createTrack();
+			
 			for (int i = 0; i < tracks.length; i++) {
 				tracks[i].fillMIDITrack(t, i);
 			}
