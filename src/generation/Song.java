@@ -9,7 +9,7 @@ public class Song {
 	Verse verse = new Verse(16,4);
 	Bridge bridge = new Bridge();
 	Ending ending = new Ending();
-	static String[] keys = new String[]{"c","c#","d","d#","e","f","f#","g","g#","a","a#","b"};
+	public static String[] keys = new String[]{"c","c#","d","d#","e","f","f#","g","g#","a","a#","b"};
 	static String[] natKeys = new String[]{"c","d","e","f","g","a","b"};
 	static String[] sharpOrder = new String[]{"c","g","d","a","e","b","f#","c#"};
 	static String[] flatOrder = new String[]{"f","a#","d#","g#"};

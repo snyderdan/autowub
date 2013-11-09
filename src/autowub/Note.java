@@ -38,8 +38,8 @@ public class Note {
 	}
 	
 	public int asMidi(){
-		for (int i = 0; i < Song.keys.length; i++){
-			if(noteToMIDI[i] == pitch){
+		for (int i = 0; i < generation.Song.keys.length; i++){
+			if(generation.Song.keys[i] == pitch){
 				return i;
 			}
 		}
