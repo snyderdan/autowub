@@ -51,7 +51,7 @@ public class Song {
 			Track t = s.createTrack();
 			
 			for (int i = 0; i < tracks.length; i++) {
-				tracks[i].fillMIDITrack(t, i);
+				tracks[i].fillMIDITrack(t, i, this.bpm);
 			}
 		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block
