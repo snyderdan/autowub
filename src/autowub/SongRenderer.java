@@ -14,7 +14,7 @@ public class SongRenderer {
 		synth = MidiSystem.getSynthesizer();
 	}
 	
-	private ArrayList<ShortMessage> processTrack(Track t, int chan){
+	private ArrayList<ShortMessage> processTrack(Track t, int chan, int beatNote, int bpm){
 		ArrayList<ShortMessage> notes = new ArrayList<ShortMessage>();
 		for(Note note : t.notes){
 			ShortMessage sm = new ShortMessage();
@@ -23,6 +23,11 @@ public class SongRenderer {
 		}
 		return notes;
 	}
+	
+	private long getNoteTimeStamp(Note n){
+		return 0;
+	}
+	
 	
 	public void play(Song s) throws MidiUnavailableException{
 		Receiver rcv = synth.getReceiver();
