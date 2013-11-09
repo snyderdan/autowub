@@ -13,6 +13,9 @@ public class SongRenderer {
 	}
 	
 	public void play(Song s) throws MidiUnavailableException, InvalidMidiDataException{
+		if(!seq.isOpen()){
+			seq.open();
+		}
 		seq.stop();
 		seq.setMicrosecondPosition(0);
 		seq.setTempoInBPM(s.bpm);
