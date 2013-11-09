@@ -6,7 +6,8 @@ import javax.sound.midi.Track;
 
 public class Song {
 	NoteTrack[] tracks = new NoteTrack[4];
-	int bpm;
+	public float bpm;
+	public double soprano, alto, tenor, bass; 
 	int beatNote;
 
 	Sequence getSequence() {
