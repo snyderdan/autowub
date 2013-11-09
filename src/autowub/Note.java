@@ -9,6 +9,7 @@ public class Note {
 	final int velocity;
 	final int octave;
 	final static int defaultOctave = 5;
+	final static int defaultVelocity = 90;
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity, int octave){
 		nt = type;
@@ -20,7 +21,7 @@ public class Note {
 	
 	public Note(double noteLength, String pitch, boolean dotted, int velocity, int octave){
 		this(fromLength(noteLength), pitch, dotted, velocity, octave);
-	}
+	}	
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity){
 		this(type, pitch, dotted, velocity, defaultOctave);
@@ -30,6 +31,13 @@ public class Note {
 		this(fromLength(noteLength),pitch, dotted, velocity);
 	}
 	
+	public Note(NoteType type, String pitch, boolean dotted){
+		this(type, pitch, dotted, defaultVelocity, defaultOctave);
+	}
+	
+	public Note(double noteLength, String pitch, boolean dotted){
+		this(fromLength(noteLength),pitch, dotted, defaultVelocity);
+	}
 	
 	public static NoteType fromLength(double length){
 		if(length >= 1){
