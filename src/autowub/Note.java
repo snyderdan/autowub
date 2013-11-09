@@ -9,14 +9,32 @@ public class Note {
 	String pitch;
 	boolean dotted;
 	
-	public Note(NoteType type, String pitch, boolean dotted){
+	public Note(NoteType type, String pitch, boolean dotted, int velocity){
 		nt = type;
 		this.pitch = pitch;
 		this.dotted = dotted;
 	}
 	
-	public double noteLength(){
-		return 0;
+	/**
+	 * 
+	 * @return number of 16th notes
+	 */
+	public int noteLength(){
+		int base = (dotted ? 3: 2);
+		switch(nt){
+		case WHOLE:
+			base*=2;
+		case HALF:
+			base*=2;
+		case QUARTER:
+			base*=2;
+		case EIGTH:
+			base*=2;
+		case SIXTEENTH:
+			base*=1;
+			break;
+		}
+		return base;
 	}
 	
 	public int asMidi(){
