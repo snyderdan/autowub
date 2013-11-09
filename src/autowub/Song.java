@@ -8,7 +8,13 @@ public class Song {
 	NoteTrack[] tracks = new NoteTrack[4];
 	int bpm;
 	int beatNote;
-
+	
+	Song(NoteTrack[] tracks, int bpm, int beatNote){
+		this.tracks = tracks;
+		this.bpm = bpm;
+		this.beatNote = beatNote;
+	}
+	
 	Sequence getSequence() {
 		Sequence s = null;
 		try {
