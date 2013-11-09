@@ -4,16 +4,21 @@ package autowub;
 public class Note {
 	
 	final NoteType nt;
-	final String pitch;
+	String pitch;
 	final boolean dotted;
 	final int velocity;
 	final int octave;
-	final static int defaultOctave = 6;
-	final static int defaultVelocity = 95;
+	final static int defaultOctave = 7;
+	final static int defaultVelocity = 80;
 	
 	public Note(NoteType type, String pitch, boolean dotted, int velocity, int octave){
 		nt = type;
 		this.pitch = pitch;
+		if(pitch.equals("e#")){
+			this.pitch = "f";
+		}else if(pitch.equals("b#")){
+			this.pitch = "c";
+		}
 		this.dotted = dotted;
 		this.velocity = velocity;
 		this.octave = octave;
@@ -81,6 +86,7 @@ public class Note {
 				return i + 11*octave;
 			}
 		}
+		System.out.println("invalid pitch " + pitch);
 		return -1;
 	}
 	
