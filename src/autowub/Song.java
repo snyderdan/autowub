@@ -32,9 +32,9 @@ public class Song {
 //	String vii[] = new String[3];
 	
 	NoteTrack[] tracks;
-	public int bpm;
+	public int bpm, instrument, octave;
 
-	public double bass, tenor, alto, soprano;
+	public double bass;
 	
 	Song(NoteTrack[] tracks, int bpm){
 	//arbitrary doubles to change song elements (to be given meaning soon), will probably change
@@ -148,7 +148,7 @@ public class Song {
 		}
 		verse.create(key, keyIndex);
 		tracks = new NoteTrack[1];
-		tracks[0] = new NoteTrack(verse.sopranoLine, 122);
+		tracks[0] = new NoteTrack(verse.sopranoLine, 100);
 	}
 	
 	public static int getKeyIndex(String note){
