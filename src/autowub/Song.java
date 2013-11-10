@@ -145,9 +145,9 @@ public class Song {
 			System.out.print("\n");
 		}
 		verse.create(key, keyIndex);
-		tracks = new NoteTrack[2];
-		tracks[0] = new NoteTrack(verse.sopranoLine, 62);
-		tracks[1] = new NoteTrack(verse.bassLine, 80);
+		tracks = new NoteTrack[1];
+		tracks[0] = new NoteTrack(verse.sopranoLine, 44);
+//		tracks[1] = new NoteTracxk(verse.bassLine, 80);
 	}
 	
 	public static int getKeyIndex(String note){
