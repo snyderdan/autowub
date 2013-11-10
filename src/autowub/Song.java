@@ -33,8 +33,10 @@ public class Song {
 	
 	NoteTrack[] tracks;
 	public int bpm;
+	public int instrument = 84;
+	public int octave = 7;
 
-	public double bass, tenor, alto, soprano;
+	public double bass; //slightly arbitrary, might remove
 	
 	Song(NoteTrack[] tracks, int bpm){
 	//arbitrary doubles to change song elements (to be given meaning soon), will probably change
@@ -148,7 +150,7 @@ public class Song {
 		}
 		verse.create(key, keyIndex);
 		tracks = new NoteTrack[1];
-		tracks[0] = new NoteTrack(verse.sopranoLine, 84);
+		tracks[0] = new NoteTrack(verse.sopranoLine, instrument);
 		tracks[1] = new NoteTrack(verse.bassLine, 84);
 	}
 	
