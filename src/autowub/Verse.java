@@ -65,7 +65,7 @@ public class Verse {
 	
 	public void createPercussion(){
 		Random randy = new Random();
-		for(int i = 0; i<numMeasures*4; i++){
+		for(int i = 0; i<numMeasures; i++){
 			if(randy.nextBoolean()){
 				for(int j = 0; j<8; j++){
 					percRhythm.add(.125);
