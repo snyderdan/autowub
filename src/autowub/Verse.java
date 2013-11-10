@@ -150,7 +150,7 @@ public class Verse {
 	
 	public void createSoprano(){
 		sopranoLine = new Note[trackRhythm.size()];
-		sopranoLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(Song.chords[0]),false);
+		sopranoLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
 		//System.out.println(Song.getKeyIndex("c"));
 		for(int i = 1; i<trackRhythm.size(); i++){
 			sopranoLine[i] = new Note(trackRhythm.get(i),pickNotePitchSop(sopranoLine[i-1].pitch,sopFlow.get(i)),false);
@@ -160,12 +160,26 @@ public class Verse {
 		}
 	}
 	
+	public void createAltoAndTenor(){
+		String[] notesUsed = new String[2];
+		for(int i = 0; i<2; i++){
+			
+		}
+		altoLine = new Note[trackRhythm.size()];
+		altoLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
+		tenorLine = new Note[trackRhythm.size()];
+		tenorLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
+	}
+	
 	public void createBass(){
 		bassLine = new Note[trackRhythm.size()];
-		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(Song.chords[0]),false);
+		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
 		for(int i = 1; i<trackRhythm.size(); i++){
-			bassLine[i] = new Note(trackRhythm.get(i),pickNotePitchBass(bassLine[i-1].pitch,bassFlow.get(i)),false);
+			bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false);
 		}
+//		for(int i = 1; i<trackRhythm.size(); i++){
+//			bassLine[i] = new Note(trackRhythm.get(i),pickNotePitchBass(bassLine[i-1].pitch,bassFlow.get(i)),false);
+//		}
 	}
 	
 	public String pickNoteFromChord(String[] chord){
