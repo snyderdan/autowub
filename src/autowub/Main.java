@@ -10,7 +10,7 @@ public class Main {
 			sr = new SongRenderer();
 			Song s = new Song();
 			System.out.println("Song generated");
-			s.bpm = 140;
+			s.bpm = 150;
 //			System.out.println("Playing, len = " + sr.play(s));
 			sr.write(s);
 //			while(sr.seqencer.isRunning()){

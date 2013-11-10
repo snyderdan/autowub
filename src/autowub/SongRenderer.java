@@ -69,14 +69,10 @@ public class SongRenderer {
 			MidiSystem.write(s.getSequence(), 0, out);
 			String envp[] = new String[1];
 			envp[0] = "PATH=" + System.getProperty("java.library.path");
-				Process timidityplayer = Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm);
-				Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Ov -o out.ogg", envp);
-				Runtime.getRuntime().exec("timidity "+out.getName()+ " -s 2000Hz"+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
-//			try{
-//				timidityplayer.waitFor();
-//			}finally{
-//				timidityplayer.destroy();
-//			}
+				Process timidityplayer = Runtime.getRuntime().exec("timidity "+out.getName()+ " -Aa -T" + s.bpm);
+				Runtime.getRuntime().exec("timidity "+out.getName()+ "-Aa -T " + s.bpm + " -Ov -o out.ogg", envp);
+				Runtime.getRuntime().exec("timidity "+out.getName()+ "-Aa -s 2000Hz"+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
+			
 			File raw = new File("out.raw");
 			FileReader fr = new  FileReader(raw);
 			Socket sock = new Socket(InetAddress.getByName("10.0.11.70"), 2345);
@@ -93,6 +89,11 @@ public class SongRenderer {
 				}catch (IOError e){
 					e.printStackTrace();
 				}
+			}
+			try{
+				timidityplayer.waitFor();
+			}finally{
+				timidityplayer.destroy();
 			}
 			System.out.println("Exiting");
 			sock.close();

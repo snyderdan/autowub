@@ -6,6 +6,7 @@ public class Note {
 	final NoteType nt;
 	String pitch;
 	final boolean isperc;
+	boolean isdotted = false;
 	final int velocity;
 	final int octave;
 	final static int defaultOctave = 7;
@@ -24,37 +25,45 @@ public class Note {
 		this.octave = octave;
 	}
 	
-	public Note(double noteLength, String pitch, boolean dotted, int velocity, int octave){
-		this(fromLength(noteLength), pitch, dotted, velocity, octave);
+	public Note(double noteLength, String pitch, boolean perc, int velocity, int octave){
+		this(fromLength(noteLength), pitch, perc, velocity, octave);
+		
 	}	
 	
-	public Note(NoteType type, String pitch, boolean dotted, int velocity){
-		this(type, pitch, dotted, velocity, defaultOctave);
+	public Note(double noteLength, String pitch, boolean perc, int velocity, int octave, boolean isDotted){
+		this(fromLength(noteLength), pitch, perc, velocity, octave);
+		this.isdotted = isDotted;
+	}	
+	
+	public Note(NoteType type, String pitch, boolean perc, int velocity){
+		this(type, pitch, perc, velocity, defaultOctave);
 	}
 	
-	public Note(double noteLength, String pitch, boolean dotted, int velocity){
-		this(fromLength(noteLength),pitch, dotted, velocity);
+	public Note(double noteLength, String pitch, boolean perc, int velocity){
+		this(fromLength(noteLength),pitch, perc, velocity);
 	}
 	
-	public Note(NoteType type, String pitch, boolean dotted){
-		this(type, pitch, dotted, defaultVelocity, defaultOctave);
+	public Note(NoteType type, String pitch, boolean perc){
+		this(type, pitch, perc, defaultVelocity, defaultOctave);
 	}
 	
-	public Note(double noteLength, String pitch, boolean dotted){
-		this(fromLength(noteLength),pitch, dotted, defaultVelocity);
+	public Note(double noteLength, String pitch, boolean perc){
+		this(fromLength(noteLength),pitch, perc, defaultVelocity);
 	}
 	
 	public static NoteType fromLength(double length){
-		if(length >= 1){
+		if(length == 1){
 			return NoteType.WHOLE;
-		}else if(length >= .5){
+		}else if(length == .5){
 			return NoteType.HALF;
-		}else if(length >= .25){
+		}else if(length == .25){
 			return NoteType.QUARTER;
-		}else if(length >= .125){
+		}else if(length == .125){
 			return NoteType.EIGTH;
-		}else{
+		}else if(length == .0625){
 			return NoteType.SIXTEENTH;
+		}else{
+			return fromLength(length/1.5);
 		}
 	}
 	
@@ -63,7 +72,7 @@ public class Note {
 	 * @return number of 32nd notes
 	 */
 	public int noteLength(){
-		int base = 2;
+		int base = (isdotted ? 3:2);
 		switch(nt){
 		case WHOLE:
 			base*=2;
