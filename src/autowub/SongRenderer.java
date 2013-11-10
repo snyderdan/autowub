@@ -69,8 +69,14 @@ public class SongRenderer {
 			MidiSystem.write(s.getSequence(), 0, out);
 			String envp[] = new String[1];
 			envp[0] = "PATH=" + System.getProperty("java.library.path");
-			Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Ov -o out.ogg", envp);
-			Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
+				Process timidityplayer = Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm);
+				Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Ov -o out.ogg", envp);
+				Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
+			try{
+				timidityplayer.waitFor();
+			}finally{
+				timidityplayer.destroy();
+			}
 //			Runtime.getRuntime().exec("paplay out.ogg");
 //			File raw = new File("out.raw");
 //			FileReader fr = new  FileReader(raw);
@@ -91,7 +97,7 @@ public class SongRenderer {
 //			System.out.println("Exiting");
 //			sock.close();
 //			fr.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

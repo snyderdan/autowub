@@ -47,6 +47,7 @@ public class Verse {
 		fillTriads();
 		boolean upFlow = true;
 		Random randy = new Random();
+		double time = 0;
 		for(int i = 0; i<numMeasures; i++){
 			System.out.println("Measure: " + i);
 			upFlow = trueOrFalse[randy.nextInt(2)];
@@ -57,7 +58,7 @@ public class Verse {
 				trackRhythm.add(noteDur);
 				sopFlow.add(upFlow);
 				bassFlow.add(!upFlow);
-				System.out.println(noteDur);
+				System.out.println(time +=noteDur);
 				beatsLeft = beatsLeft - noteDur;
 			}
 		}
@@ -65,7 +66,7 @@ public class Verse {
 	
 	public void createPercussion(){
 		Random randy = new Random();
-		for(int i = 0; i<numMeasures; i++){
+		for(int i = 0; i<numMeasures*numBeats; i++){
 			if(randy.nextBoolean()){
 				for(int j = 0; j<8; j++){
 					percRhythm.add(.125);
@@ -261,6 +262,14 @@ public class Verse {
 //		return chord;
 //	}
 	
+	public double trackLength(){
+		double time = 0 ;
+		for(int i = 0; i<trackRhythm.size();i++){
+			time += trackRhythm.get(i);
+		}
+		return time;
+	}
+	
 	public void createSoprano(){
 		sopranoLine = new Note[trackRhythm.size()];
 		sopranoLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
@@ -295,9 +304,9 @@ public class Verse {
 		for(int i = 1; i<trackRhythm.size()-2; i++){
 			//bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false,100,Note.defaultOctave-3);
 			if(bassLine[i-1].pitch.equals(leadingTone)){
-				bassLine[i] = new Note(trackRhythm.get(i),I[0],false);
+				bassLine[i] = new Note(trackRhythm.get(i),I[0],false, Note.defaultVelocity, Note.defaultOctave-3);
 			}else{
-				bassLine[i] = new Note(trackRhythm.get(i),chordProg[i][0],false,100,Note.defaultOctave-3);
+				bassLine[i] = new Note(trackRhythm.get(i),chordProg[i][0],false,Note.defaultVelocity,Note.defaultOctave-3);
 			}
 		}
 //		for(int i = 1; i<trackRhythm.size(); i++){
