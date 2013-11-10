@@ -68,12 +68,26 @@ public class Verse {
 		Random randy = new Random();
 		for(int i = 0; i<numMeasures*numBeats; i++){
 			if(randy.nextBoolean()){
-				for(int j = 0; j<8; j++){
-					percRhythm.add(.125);
+				if(randy.nextBoolean()){
+					for(int j = 0; j<8; j++){
+						percRhythm.add(.125);
+					}
+				}else{
+					for(int b = 0; b<4; b++){
+						percRhythm.add(.125*1.5);
+						percRhythm.add(.125*.5);
+					}
 				}
 			}else{
-				for(int k = 0; k<4; k++){
-					percRhythm.add(.25);
+				if(randy.nextBoolean()){
+					for(int k = 0; k<4; k++){
+						percRhythm.add(.25);
+					}
+				}else{
+					for(int a = 0; a<2; a++){
+						percRhythm.add(.25*1.5);
+						percRhythm.add(.25*.5);
+					}
 				}
 			}
 		}
@@ -321,7 +335,13 @@ public class Verse {
 	}
 	
 	public String pickNoteFromChord(String[] chord,String[] notesUsed){
+		ArrayList<String> newChord = new ArrayList<String>();
 		Random randy = new Random();
+		for(int i = 0; i<chord.length; i++){
+			for(int j = 0; j<notesUsed.length; j++){
+				
+			}
+		}
 		String note = chord[randy.nextInt(chord.length)];
 		return note;
 	}
