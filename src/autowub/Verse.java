@@ -66,12 +66,12 @@ public class Verse {
 		Random randy = new Random();
 		for(int i = 0; i<numMeasures*4; i++){
 			if(randy.nextBoolean()){
-				for(int j = 0; j<16; j++){
-					percRhythm.add(.0625);
+				for(int j = 0; j<8; j++){
+					percRhythm.add(.125);
 				}
 			}else{
-				for(int k = 0; k<16; k++){
-					percRhythm.add(.125);
+				for(int k = 0; k<4; k++){
+					percRhythm.add(.25);
 				}
 			}
 		}
