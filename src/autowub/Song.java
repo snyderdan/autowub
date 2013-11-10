@@ -33,8 +33,10 @@ public class Song {
 	
 	NoteTrack[] tracks;
 	public int bpm;
+	public int instrument = 84;
+	public int octave = 7;
 
-	public double bass, tenor, alto, soprano;
+	public double bass; //slightly arbitrary, might remove
 	
 	Song(NoteTrack[] tracks, int bpm){
 	//arbitrary doubles to change song elements (to be given meaning soon), will probably change
@@ -60,10 +62,6 @@ public class Song {
 		return s;
 	}
 	
-	public static void main(String[] args){
-		Song wub = new Song();
-		wub.play();
-	}
 	
 	public Song(){
 		pickKey();
@@ -147,8 +145,9 @@ public class Song {
 			System.out.print("\n");
 		}
 		verse.create(key, keyIndex);
-		tracks = new NoteTrack[1];
+		tracks = new NoteTrack[2];
 		tracks[0] = new NoteTrack(verse.sopranoLine, 62);
+		tracks[1] = new NoteTrack(verse.bassLine, 80);
 	}
 	
 	public static int getKeyIndex(String note){
@@ -179,14 +178,4 @@ public class Song {
 		key = keys[keyIndex];
 	}
 	
-	public void play(){
-		
-		verse.play();
-		chorus.play();
-		verse.play();
-		chorus.play();
-		bridge.play();
-		chorus.play();
-		ending.play();
-	}
 }

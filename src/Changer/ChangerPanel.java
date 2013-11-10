@@ -9,11 +9,15 @@ import java.awt.event.*;
 public class ChangerPanel extends JPanel
 {
 	private SongChanger SChanger;
-	private JCheckBox tempo, soprano, alto, tenor, bass;
-	private JTextField tempoPercent, sopranoPercent, altoPercent, tenorPercent, bassPercent;
-	private boolean tempoChanged, sopranoChanged, altoChanged, tenorChanged, bassChanged = false;
-	private JLabel percentage, percentage2, percentage3, percentage4, percentage5;
+	private JCheckBox tempo, bass;
+	private JTextField tempoPercent, bassPercent;
+	private boolean tempoChanged, bassChanged = false;
+	private JLabel percentage, percentage2;
 	private JButton change;
+	private JRadioButton upOctave, stayOctave, downOctave;
+	private JRadioButton instrument1, instrument2, instrument3;
+	private int inst = 1;
+	private int octaveChange = 0;
 	
 	public ChangerPanel(SongChanger SChanger)
 	{
@@ -23,48 +27,63 @@ public class ChangerPanel extends JPanel
 		change.addActionListener(changer);
 		percentage = new JLabel("By what percent?");
 		percentage2 = new JLabel("By what percent?");
-		percentage3 = new JLabel("By what percent?");
-		percentage4 = new JLabel("By what percent?");
-		percentage5 = new JLabel("By what percent?");
 		
 		tempo = new JCheckBox("Change tempo?");
-		soprano = new JCheckBox("Change soprano?");
-		alto = new JCheckBox("Change alto?");
-		tenor = new JCheckBox("Change tenor?");
 		bass = new JCheckBox("Change bass?");
 		CheckBoxListener checkBoxListener = new CheckBoxListener();
 		tempo.addItemListener(checkBoxListener);
-		soprano.addItemListener(checkBoxListener);
-		alto.addItemListener(checkBoxListener);
-		tenor.addItemListener(checkBoxListener);
 		bass.addItemListener(checkBoxListener);
-		
 		tempoPercent = new JTextField(3);
-		sopranoPercent = new JTextField(3);
-		altoPercent = new JTextField(3);
-		tenorPercent = new JTextField(3);
 		bassPercent = new JTextField(3);
 		tempoPercent.setText("0");
-		sopranoPercent.setText("0");
-		altoPercent.setText("0");
-		tenorPercent.setText("0");
 		bassPercent.setText("0");
+		
+		upOctave = new JRadioButton("+ Octave", false);
+		stayOctave = new JRadioButton("stay", true);
+		downOctave = new JRadioButton("- Octave", false);
+		OctaveListener octList = new OctaveListener();
+		upOctave.addActionListener(octList);
+		stayOctave.addActionListener(octList);
+		downOctave.addActionListener(octList);
+		ButtonGroup octaves = new ButtonGroup();
+		octaves.add(upOctave);
+		octaves.add(stayOctave);
+		octaves.add(downOctave);
+		
+		JPanel octavePanel = new JPanel();
+		octavePanel.setPreferredSize(new Dimension(100, 150));
+		octavePanel.setBorder(BorderFactory.createEtchedBorder());
+		octavePanel.add(upOctave);
+		octavePanel.add(stayOctave);
+		octavePanel.add(downOctave);
+		
+		instrument1 = new JRadioButton("Inst #1", true);
+		instrument2 = new JRadioButton("Inst #2", false);
+		instrument3 = new JRadioButton("Inst #3", false);
+		InstrumentListener instList = new InstrumentListener();
+		instrument1.addActionListener(instList);
+		instrument2.addActionListener(instList);
+		instrument3.addActionListener(instList);
+		ButtonGroup instruments = new ButtonGroup();
+		instruments.add(instrument1);
+		instruments.add(instrument2);
+		instruments.add(instrument3);
+		
+		JPanel instPanel = new JPanel();
+		instPanel.setPreferredSize(new Dimension(100, 150));
+		instPanel.setBorder(BorderFactory.createEtchedBorder());
+		instPanel.add(instrument1);
+		instPanel.add(instrument2);
+		instPanel.add(instrument3);
 		
 		add(tempo);
 		add(percentage);
 		add(tempoPercent);
-		add(soprano);
-		add(percentage2);
-		add(sopranoPercent);
-		add(alto);
-		add(percentage3);
-		add(altoPercent);
-		add(tenor);
-		add(percentage4);
-		add(tenorPercent);
 		add(bass);
-		add(percentage5);
+		add(percentage2);
 		add(bassPercent);
+		add(octavePanel);
+		add(instPanel);
 		add(change);
 		setPreferredSize(new Dimension(325, 250));
 	}
@@ -75,14 +94,11 @@ public class ChangerPanel extends JPanel
 		{
 			if(tempoChanged)
 				SChanger.changeTempo(Integer.parseInt(tempoPercent.getText()) / 100);
-			if(sopranoChanged)
-				SChanger.changeSoprano(Integer.parseInt(sopranoPercent.getText()) / 100);
-			if(altoChanged)
-				SChanger.changeAlto(Integer.parseInt(altoPercent.getText()) / 100);
-			if(tenorChanged)
-				SChanger.changeTenor(Integer.parseInt(tenorPercent.getText()) / 100);
 			if(bassChanged)
 				SChanger.changeBass(Integer.parseInt(bassPercent.getText()) / 100);
+			SChanger.changeOctave(octaveChange);
+			SChanger.changeInstument(inst);
+			
 			ChangerPanel.this.setVisible(false);
 		}
 	}
@@ -92,10 +108,41 @@ public class ChangerPanel extends JPanel
 		public void itemStateChanged(ItemEvent event)
 		{
 			tempoChanged = tempo.isSelected();
-			sopranoChanged = soprano.isSelected();
-			altoChanged = alto.isSelected();
-			tenorChanged = tenor.isSelected();
 			bassChanged = bass.isSelected();
+		}
+	}
+	
+	private class OctaveListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			Object source = event.getSource();
+			if(source == upOctave)
+				octaveChange = 1;
+			else
+			{
+				if(source == downOctave)
+					octaveChange = -1;
+				else
+					octaveChange = 0;
+			}
+		}
+	}
+	
+	private class InstrumentListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			Object source = event.getSource();
+			if(source == instrument1)
+				inst = 84; //change to instrument signature
+			else
+			{
+				if(source == instrument2)
+					inst = 2;//change to instrument signature
+				else
+					inst = 3;//change to instrument signature
+			}
 		}
 	}
 }
