@@ -33,8 +33,8 @@ public class Song {
 	
 	NoteTrack[] tracks;
 	public int bpm;
-	public int instrument = 84;
-	public int octave = 7;
+	public int[] instruments = {84};
+	public int octave = 6;
 
 	public double bass; //slightly arbitrary, might remove
 	
@@ -150,7 +150,7 @@ public class Song {
 		}
 		verse.create(key, keyIndex);
 		tracks = new NoteTrack[1];
-		tracks[0] = new NoteTrack(verse.sopranoLine, instrument);
+		tracks[0] = new NoteTrack(verse.sopranoLine, instruments[0]);
 	}
 	
 	public static int getKeyIndex(String note){
