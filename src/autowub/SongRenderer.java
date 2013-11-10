@@ -14,6 +14,7 @@ import javax.sound.midi.Instrument;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Patch;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.Soundbank;
@@ -29,11 +30,9 @@ public class SongRenderer {
 		synth = MidiSystem.getSynthesizer();
 		synth.open();
 		try {
-			Soundbank sb = MidiSystem.getSoundbank(new File("/usr/share/soundfonts/fluidr3/FluidR3GM.SF2"));
-			if(synth.isSoundbankSupported(sb)){
-				boolean success = synth.loadAllInstruments(sb);
-				System.out.println(success);
-			}
+			Soundbank sb = MidiSystem.getSoundbank(new File("FluidR3GM.SF2"));
+			boolean success = synth.loadAllInstruments(sb);
+			synth.getChannels()[0].programChange(4);
 		} catch (InvalidMidiDataException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

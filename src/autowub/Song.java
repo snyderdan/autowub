@@ -146,7 +146,7 @@ public class Song {
 		}
 		verse.create(key, keyIndex);
 		tracks = new NoteTrack[1];
-		tracks[0] = new NoteTrack(verse.sopranoLine, 44);
+		tracks[0] = new NoteTrack(verse.sopranoLine);
 //		tracks[1] = new NoteTracxk(verse.bassLine, 80);
 	}
 	
