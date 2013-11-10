@@ -11,18 +11,15 @@ public class Main {
 			Song s = new Song();
 			System.out.println("Song generated");
 			s.bpm = 140;
-			System.out.println("Playing, len = " + sr.play(s));
+//			System.out.println("Playing, len = " + sr.play(s));
 			sr.write(s);
-			while(sr.seqencer.isRunning()){
-				sr.seqencer.getMicrosecondPosition();
-				//System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
-			}
+//			while(sr.seqencer.isRunning()){
+//				sr.seqencer.getMicrosecondPosition();
+//				//System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
+//			}
 			
 			
 		} catch (MidiUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{

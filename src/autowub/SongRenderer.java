@@ -69,29 +69,35 @@ public class SongRenderer {
 			MidiSystem.write(s.getSequence(), 0, out);
 			String envp[] = new String[1];
 			envp[0] = "PATH=" + System.getProperty("java.library.path");
-			Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Ov -o out.ogg", envp);
-			Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
-//			Runtime.getRuntime().exec("paplay out.ogg");
-//			File raw = new File("out.raw");
-//			FileReader fr = new  FileReader(raw);
-//			Socket sock = new Socket(InetAddress.getByName("10.0.11.70"), 2345);
-//			System.out.println("Streaming");
-//			while(true){
-//				try{
-//					char[] sample = new char[2];
-//					if(fr.read(sample, 0, sample.length) == -1){
-//						break;
-//					}
-//					sock.getOutputStream().write(String.valueOf(sample).getBytes());
-//					sock.getOutputStream().flush();
-//				}catch (IOError e){
-//					e.printStackTrace();
-//				}
+				Process timidityplayer = Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm);
+				Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Ov -o out.ogg", envp);
+				Runtime.getRuntime().exec("timidity "+out.getName()+ " -s 2000Hz"+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
+//			try{
+//				timidityplayer.waitFor();
+//			}finally{
+//				timidityplayer.destroy();
 //			}
-//			System.out.println("Exiting");
-//			sock.close();
-//			fr.close();
-		} catch (IOException e) {
+			File raw = new File("out.raw");
+			FileReader fr = new  FileReader(raw);
+			Socket sock = new Socket(InetAddress.getByName("10.0.11.70"), 2345);
+			System.out.println("Streaming");
+			//double timeBetweenSamples
+			while(true){
+				try{
+					char[] sample = new char[2];
+					if(fr.read(sample, 0, sample.length) == -1){
+						break;
+					}
+					sock.getOutputStream().write(String.valueOf(sample).getBytes());
+					sock.getOutputStream().flush();
+				}catch (IOError e){
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Exiting");
+			sock.close();
+			fr.close();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

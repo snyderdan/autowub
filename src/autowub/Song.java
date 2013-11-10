@@ -146,11 +146,13 @@ public class Song {
 		}
 		verse.create(key, keyIndex);
 		tracks = new NoteTrack[3];
-		tracks[0] = new NoteTrack(verse.sopranoLine, 5);
-		tracks[1] = new NoteTrack(verse.bassLine, 15);
+		tracks[0] = new NoteTrack(verse.sopranoLine, 1);
+		tracks[1] = new NoteTrack(verse.bassLine, 5);
 		Note[] perc = new Note[verse.percRhythm.size()];
+		double length = 0;
 		for(int i = 0; i< perc.length; i++){
-			perc[i] = new Note(verse.percRhythm.get(i), "c#", true, 100, 4);
+			perc[i] = new Note(verse.percRhythm.get(i), "c#", true, 60, 3);
+//			length += tracks[0].notes[i].noteLength() * .125;
 		}
 		tracks[2] = new NoteTrack(perc, 1);
 	}

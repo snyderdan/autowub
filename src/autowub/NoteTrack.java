@@ -27,7 +27,7 @@ public class NoteTrack {
 				t.add(new MidiEvent(new ShortMessage(ShortMessage.POLY_PRESSURE, channel, notes[i].asMidi(), 100 ), timestamp+2));
 //				int intensity = 100
 				timestamp +=  notes[i].noteLength();
-				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_OFF, channel, notes[i].asMidi(), notes[i].velocity*2/3 ), timestamp));
+				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_OFF, channel, notes[i].asMidi(), notes[i].velocity ), timestamp));
 
 			}else{
 				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_ON, channel, notes[i].asMidi(), notes[i].velocity ), timestamp));
