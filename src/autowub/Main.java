@@ -13,7 +13,8 @@ public class Main {
 			s.bpm = 160;
 			System.out.println("Playing, len = " + sr.play(s));
 			while(sr.seqencer.isRunning()){
-				System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
+				sr.seqencer.getMicrosecondPosition();
+				//System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
 			}
 			
 			
