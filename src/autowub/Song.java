@@ -151,6 +151,7 @@ public class Song {
 		verse.create(key, keyIndex);
 		tracks = new NoteTrack[1];
 		tracks[0] = new NoteTrack(verse.sopranoLine, instruments[0]);
+		tracks[1] = new NoteTrack(verse.bassLine, 84);
 	}
 	
 	public static int getKeyIndex(String note){
@@ -182,7 +183,6 @@ public class Song {
 	}
 	
 	public void play(){
-		
 		verse.play();
 		chorus.play();
 		verse.play();
