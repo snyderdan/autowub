@@ -15,7 +15,7 @@ public class NoteTrack {
 	}
 	
 	
-	public void fillMIDITrack(Track t, int channel) throws InvalidMidiDataException{
+	public void fillMIDITrack(Track t, int channel, int bpm) throws InvalidMidiDataException{
 		long timestamp = 0;
 		t.add(new MidiEvent(new ShortMessage(ShortMessage.PROGRAM_CHANGE, channel, instrument, 0), 0));
 		for(int i =0; i< notes.length; i++){
@@ -23,7 +23,7 @@ public class NoteTrack {
 				timestamp += notes[i].noteLength();
 			}else{
 				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_ON, channel, notes[i].asMidi(), notes[i].velocity ), timestamp));
-				t.add(new MidiEvent(new ShortMessage(ShortMessage.CHANNEL_PRESSURE, channel, notes[i].asMidi(), 80 ), timestamp+1400));
+				t.add(new MidiEvent(new ShortMessage(ShortMessage.CHANNEL_PRESSURE, channel, notes[i].asMidi(), 80 ), timestamp+2));
 				timestamp += notes[i].noteLength();
 				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_OFF, channel, notes[i].asMidi(), notes[i].velocity ), timestamp));
 			}

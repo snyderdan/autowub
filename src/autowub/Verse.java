@@ -173,9 +173,9 @@ public class Verse {
 	
 	public void createBass(){
 		bassLine = new Note[trackRhythm.size()];
-		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
+		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false,100,Note.defaultOctave-3);
 		for(int i = 1; i<trackRhythm.size(); i++){
-			bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false);
+			bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false,100,Note.defaultOctave-3);
 		}
 //		for(int i = 1; i<trackRhythm.size(); i++){
 //			bassLine[i] = new Note(trackRhythm.get(i),pickNotePitchBass(bassLine[i-1].pitch,bassFlow.get(i)),false);

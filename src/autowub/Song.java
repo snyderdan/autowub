@@ -33,8 +33,8 @@ public class Song {
 	
 	NoteTrack[] tracks;
 	public int bpm;
-	public int instrument = 84;
-	public int octave = 7;
+	public int[] instruments = {84};
+	public int octave = 6;
 
 	public double bass; //slightly arbitrary, might remove
 	
@@ -53,7 +53,7 @@ public class Song {
 			Track t = s.createTrack();
 			
 			for (int i = 0; i < tracks.length; i++) {
-				tracks[i].fillMIDITrack(t, i);
+				tracks[i].fillMIDITrack(t, i, this.bpm);
 			}
 		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block
@@ -62,10 +62,6 @@ public class Song {
 		return s;
 	}
 	
-	public static void main(String[] args){
-		Song wub = new Song();
-		wub.play();
-	}
 	
 	public Song(){
 		pickKey();
@@ -149,9 +145,9 @@ public class Song {
 			System.out.print("\n");
 		}
 		verse.create(key, keyIndex);
-		tracks = new NoteTrack[1];
-		tracks[0] = new NoteTrack(verse.sopranoLine, instrument);
-		tracks[1] = new NoteTrack(verse.bassLine, 84);
+		tracks = new NoteTrack[2];
+		tracks[0] = new NoteTrack(verse.sopranoLine, 62);
+		tracks[1] = new NoteTrack(verse.bassLine, 80);
 	}
 	
 	public static int getKeyIndex(String note){
@@ -182,13 +178,4 @@ public class Song {
 		key = keys[keyIndex];
 	}
 	
-	public void play(){
-		verse.play();
-		chorus.play();
-		verse.play();
-		chorus.play();
-		bridge.play();
-		chorus.play();
-		ending.play();
-	}
 }
