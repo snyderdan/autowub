@@ -5,13 +5,13 @@ public class Note {
 	
 	final NoteType nt;
 	String pitch;
-	final boolean dotted;
+	final boolean isperc;
 	final int velocity;
 	final int octave;
-	final static int defaultOctave = 6;
+	final static int defaultOctave = 7;
 	final static int defaultVelocity = 80;
 	
-	public Note(NoteType type, String pitch, boolean dotted, int velocity, int octave){
+	public Note(NoteType type, String pitch, boolean perc, int velocity, int octave){
 		nt = type;
 		this.pitch = pitch;
 		if(pitch.equals("e#")){
@@ -19,7 +19,7 @@ public class Note {
 		}else if(pitch.equals("b#")){
 			this.pitch = "c";
 		}
-		this.dotted = dotted;
+		this.isperc = perc;
 		this.velocity = velocity;
 		this.octave = octave;
 	}
@@ -63,7 +63,7 @@ public class Note {
 	 * @return number of 32nd notes
 	 */
 	public int noteLength(){
-		int base = (dotted ? 3: 2);
+		int base = 2;
 		switch(nt){
 		case WHOLE:
 			base*=2;
