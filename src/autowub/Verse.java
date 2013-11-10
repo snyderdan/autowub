@@ -9,6 +9,7 @@ public class Verse {
 	int keyIndex;
 	double noteTypes[] = new double[]{.25,.25,.25,.25,.5,.5,1,1,.125,.125,.125,.125,.0625,.0625,.0625};
 	ArrayList<Double> trackRhythm = new ArrayList<Double>();
+	ArrayList<Double> percRhythm = new ArrayList<Double>();
 	ArrayList<Boolean> sopFlow = new ArrayList<Boolean>();
 	ArrayList<Boolean> bassFlow = new ArrayList<Boolean>();
 	boolean trueOrFalse[] = new boolean[]{true,false};
@@ -57,6 +58,21 @@ public class Verse {
 				bassFlow.add(!upFlow);
 				System.out.println(noteDur);
 				beatsLeft = beatsLeft - noteDur;
+			}
+		}
+	}
+	
+	public void createPercussion(){
+		Random randy = new Random();
+		for(int i = 0; i<numMeasures*4; i++){
+			if(randy.nextBoolean()){
+				for(int j = 0; j<16; j++){
+					percRhythm.add(.0625);
+				}
+			}else{
+				for(int k = 0; k<16; k++){
+					percRhythm.add(.125);
+				}
 			}
 		}
 	}
