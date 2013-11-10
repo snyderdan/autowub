@@ -30,9 +30,9 @@ public class SongRenderer {
 		synth = MidiSystem.getSynthesizer();
 		synth.open();
 		try {
-			Soundbank sb = MidiSystem.getSoundbank(new File("FluidR3GM.SF2"));
+			Soundbank sb = MidiSystem.getSoundbank(new File("mariopaint.sf2"));
 			boolean success = synth.loadAllInstruments(sb);
-			synth.getChannels()[0].programChange(4);
+//			synth.getChannels()[0].programChange(18);
 		} catch (InvalidMidiDataException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

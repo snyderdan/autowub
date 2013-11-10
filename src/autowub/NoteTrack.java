@@ -8,15 +8,17 @@ import javax.sound.midi.Track;
 
 public class NoteTrack {
 	final Note[] notes;
+	final int instrument;
 	
-	public NoteTrack(Note[] notes){
+	public NoteTrack(Note[] notes, int instrument){
 		this.notes = notes;
+		this.instrument = instrument;
 	}
 	
 	
 	public void fillMIDITrack(Track t, int channel, int bpm) throws InvalidMidiDataException{
 		long timestamp = 0;
-//		t.add(new MidiEvent(new ShortMessage(ShortMessage.PROGRAM_CHANGE, channel, instrument, 0), 0));
+		t.add(new MidiEvent(new ShortMessage(ShortMessage.PROGRAM_CHANGE, channel, instrument, 0), 0));
 		for(int i =0; i< notes.length; i++){
 			if(notes[i].pitch == null){
 				timestamp += notes[i].noteLength();
