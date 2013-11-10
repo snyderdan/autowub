@@ -140,10 +140,10 @@ public class SongChanger
 	
 	public void createNewSong(Song song)
 	{
-		song.bpm = (int) values[0];
-		song.bass = values[1];
-		song.octave = (int) values[2];
-		song.instrument = (int) values[3];
+		song.bpm = (int) tempo;
+		song.bass = bass;
+		song.octave = octave;
+		song.instrument = instrument;
 	}
 	
 //	public Song leapMotionControl(Track track)

@@ -135,7 +135,7 @@ public class ChangerPanel extends JPanel
 		{
 			Object source = event.getSource();
 			if(source == instrument1)
-				inst = 1; //change to instrument signature
+				inst = 84; //change to instrument signature
 			else
 			{
 				if(source == instrument2)
