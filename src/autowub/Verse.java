@@ -24,6 +24,7 @@ public class Verse {
 	String[] V;
 	String[] vi;
 	String[] vii;
+	String leadingTone;
 	
 	public void play(){
 		
@@ -35,6 +36,9 @@ public class Verse {
 		createSoprano();
 		createChords();
 		createBass();
+		for(int i = 0; i < trackRhythm.size(); i++){
+			System.out.println("Chord: " + chordProg[i][0] + chordProg[i][1] + chordProg[i][2] + " Soprano: " + sopranoLine[i].pitch + " Bass: " + bassLine[i].pitch);
+		}
 	}
 	
 	public void createRhythm(){
@@ -56,25 +60,39 @@ public class Verse {
 			}
 		}
 	}
-	
+	 
 	public void createChords(){
 		chordProg = new String[trackRhythm.size()][3];
 		chordProg[0] = I;
 		for(int i = 1; i<chordProg.length; i++){
-			chordProg[i] = pickChord(chordProg[i-1], chordWithRoot(Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)][0]),
-					chordWithRoot(Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)][1]),
-					chordWithRoot(Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)][2])); //Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)];
+			chordProg[i] = pickChord(chordProg[i-1],sopranoLine[i].pitch);
+//			chordProg[i] = pickChord(chordProg[i-1], chordWithRoot(Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)][0]),
+//					chordWithRoot(Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)][1]),
+//					chordWithRoot(Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)][2])); //Song.chords[Song.getKeyIndex(sopranoLine[i].pitch)];
 		}
 //		for(int i = 0; i<chordProg.length; i++){
 //			
 //		}
 	}
 	
-	public String[] pickChord(String[] lastChord, String[] one, String[] two, String[] three){
+	public String[] pickChord(String[] lastChord, String root){
+		String[] optionOne = I;
+		String[] optionTwo = I;
+		String[] optionThree = I;
+		for(int i = 0; i<Song.chords.length; i++){
+			if(root.equals(Song.chords[i][0])){
+				optionOne = Song.chords[i];
+			}else if(root.equals(Song.chords[i][1])){
+				optionTwo = Song.chords[i];
+			}else if(root.equals(Song.chords[i][2])){
+				optionThree = Song.chords[i];
+			}
+		}
 		System.out.println("last chord: " + lastChord[0] + lastChord[1] + lastChord[2]);
-		System.out.println("one chord: " + one[0] + one[1] + one[2]);
-		System.out.println("two chord: " + two[0] + two[1] + two[2]);
-		System.out.println("three chord: " + three[0] + three[1] + three[2]);
+		System.out.println("root note: " + root);
+		System.out.println("optionOne chord: " + optionOne[0] + optionOne[1] + optionOne[2]);
+		System.out.println("optionTwo chord: " + optionTwo[0] + optionTwo[1] + optionTwo[2]);
+		System.out.println("optionThree chord: " + optionThree[0] + optionThree[1] + optionThree[2]);
 		ArrayList<String[]> chords = new ArrayList<String[]>();
 		String chord[] = I;
 		Random randy = new Random();
@@ -83,57 +101,57 @@ public class Verse {
 			return chord;
 		}
 		if(lastChord.equals(ii)){
-			if(one.equals(V) || two.equals(V) || three.equals(V)){
+			if(optionOne.equals(V) || optionTwo.equals(V) || optionThree.equals(V)){
 				chords.add(V);
 			}
-			if(one.equals(vii) || two.equals(vii) || three.equals(vii)){
+			if(optionOne.equals(vii) || optionTwo.equals(vii) || optionThree.equals(vii)){
 				chords.add(vii);
 			}
 		}
 		if(lastChord.equals(iii)){
-			if(one.equals(ii) || two.equals(ii) || three.equals(ii)){
+			if(optionOne.equals(ii) || optionTwo.equals(ii) || optionThree.equals(ii)){
 				chords.add(ii);
 			}
-			if(one.equals(IV) || two.equals(IV) || three.equals(IV)){
+			if(optionOne.equals(IV) || optionTwo.equals(IV) || optionThree.equals(IV)){
 				chords.add(IV);
 			}
-			if(one.equals(V) || two.equals(V) || three.equals(V)){
+			if(optionOne.equals(V) || optionTwo.equals(V) || optionThree.equals(V)){
 				chords.add(V);
 			}
-			if(one.equals(vi) || two.equals(vi) || three.equals(vi)){
+			if(optionOne.equals(vi) || optionTwo.equals(vi) || optionThree.equals(vi)){
 				chords.add(vi);
 			}
 		}
 		if(lastChord.equals(IV)){
-			if(one.equals(I) || two.equals(I) || three.equals(I)){
+			if(optionOne.equals(I) || optionTwo.equals(I) || optionThree.equals(I)){
 				chords.add(I);
 			}
-			if(one.equals(ii) || two.equals(ii) || three.equals(ii)){
+			if(optionOne.equals(ii) || optionTwo.equals(ii) || optionThree.equals(ii)){
 				chords.add(V);
 			}
-			if(one.equals(V) || two.equals(V) || three.equals(V)){
+			if(optionOne.equals(V) || optionTwo.equals(V) || optionThree.equals(V)){
 				chords.add(V);
 			}
-			if(one.equals(vii) || two.equals(vii) || three.equals(vii)){
+			if(optionOne.equals(vii) || optionTwo.equals(vii) || optionThree.equals(vii)){
 				chords.add(vii);
 			}
 		}
 		if(lastChord.equals(V)){
-			if(one.equals(I) || two.equals(I) || three.equals(I)){
+			if(optionOne.equals(I) || optionTwo.equals(I) || optionThree.equals(I)){
 				chords.add(I);
 			}
-			if(one.equals(vi) || two.equals(vi) || three.equals(vi)){
+			if(optionOne.equals(vi) || optionTwo.equals(vi) || optionThree.equals(vi)){
 				chords.add(V);
 			}
 		}
 		if(lastChord.equals(vi)){
-			if(one.equals(ii) || two.equals(ii) || three.equals(ii)){
+			if(optionOne.equals(ii) || optionTwo.equals(ii) || optionThree.equals(ii)){
 				chords.add(ii);
 			}
-			if(one.equals(IV) || two.equals(IV) || three.equals(IV)){
+			if(optionOne.equals(IV) || optionTwo.equals(IV) || optionThree.equals(IV)){
 				chords.add(IV);
 			}
-			if(one.equals(V) || two.equals(V) || three.equals(V)){
+			if(optionOne.equals(V) || optionTwo.equals(V) || optionThree.equals(V)){
 				chords.add(V);
 			}
 		}
@@ -142,18 +160,102 @@ public class Verse {
 		}
 		System.out.println(chords.size());
 		if(chords.size()==0){
-			return I;
+			return optionOne;
 		}
 		chord = chords.get(randy.nextInt(chords.size()));
 		return chord;
 	}
 	
+//	public String[] pickChord(String[] lastChord, String[] one, String[] two, String[] three){
+//		System.out.println("last chord: " + lastChord[0] + lastChord[1] + lastChord[2]);
+//		System.out.println("one chord: " + one[0] + one[1] + one[2]);
+//		System.out.println("two chord: " + two[0] + two[1] + two[2]);
+//		System.out.println("three chord: " + three[0] + three[1] + three[2]);
+//		ArrayList<String[]> chords = new ArrayList<String[]>();
+//		String chord[] = I;
+//		Random randy = new Random();
+//		if(lastChord.equals(I)){
+//			chord = Song.chords[randy.nextInt(Song.chords.length)];
+//			return chord;
+//		}
+//		if(lastChord.equals(ii)){
+//			if(one.equals(V) || two.equals(V) || three.equals(V)){
+//				chords.add(V);
+//			}
+//			if(one.equals(vii) || two.equals(vii) || three.equals(vii)){
+//				chords.add(vii);
+//			}
+//		}
+//		if(lastChord.equals(iii)){
+//			if(one.equals(ii) || two.equals(ii) || three.equals(ii)){
+//				chords.add(ii);
+//			}
+//			if(one.equals(IV) || two.equals(IV) || three.equals(IV)){
+//				chords.add(IV);
+//			}
+//			if(one.equals(V) || two.equals(V) || three.equals(V)){
+//				chords.add(V);
+//			}
+//			if(one.equals(vi) || two.equals(vi) || three.equals(vi)){
+//				chords.add(vi);
+//			}
+//		}
+//		if(lastChord.equals(IV)){
+//			if(one.equals(I) || two.equals(I) || three.equals(I)){
+//				chords.add(I);
+//			}
+//			if(one.equals(ii) || two.equals(ii) || three.equals(ii)){
+//				chords.add(V);
+//			}
+//			if(one.equals(V) || two.equals(V) || three.equals(V)){
+//				chords.add(V);
+//			}
+//			if(one.equals(vii) || two.equals(vii) || three.equals(vii)){
+//				chords.add(vii);
+//			}
+//		}
+//		if(lastChord.equals(V)){
+//			if(one.equals(I) || two.equals(I) || three.equals(I)){
+//				chords.add(I);
+//			}
+//			if(one.equals(vi) || two.equals(vi) || three.equals(vi)){
+//				chords.add(V);
+//			}
+//		}
+//		if(lastChord.equals(vi)){
+//			if(one.equals(ii) || two.equals(ii) || three.equals(ii)){
+//				chords.add(ii);
+//			}
+//			if(one.equals(IV) || two.equals(IV) || three.equals(IV)){
+//				chords.add(IV);
+//			}
+//			if(one.equals(V) || two.equals(V) || three.equals(V)){
+//				chords.add(V);
+//			}
+//		}
+//		if(lastChord.equals(vii)){
+//			return I;
+//		}
+//		System.out.println(chords.size());
+//		if(chords.size()==0){
+//			return I;
+//		}
+//		chord = chords.get(randy.nextInt(chords.size()));
+//		return chord;
+//	}
+	
 	public void createSoprano(){
 		sopranoLine = new Note[trackRhythm.size()];
 		sopranoLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
+		sopranoLine[sopranoLine.length-1] = new Note(trackRhythm.get(sopranoLine.length-1),pickNoteFromChord(I),false);
+		sopranoLine[sopranoLine.length-2] = new Note(trackRhythm.get(sopranoLine.length-2),pickNoteFromChord(V),false);
 		//System.out.println(Song.getKeyIndex("c"));
-		for(int i = 1; i<trackRhythm.size(); i++){
-			sopranoLine[i] = new Note(trackRhythm.get(i),pickNotePitchSop(sopranoLine[i-1].pitch,sopFlow.get(i)),false);
+		for(int i = 1; i<trackRhythm.size()-2; i++){
+			if(sopranoLine[i-1].pitch.equals(leadingTone)){
+				sopranoLine[i] = new Note(trackRhythm.get(i),I[0],false);
+			}else{
+				sopranoLine[i] = new Note(trackRhythm.get(i),pickNotePitchSop(sopranoLine[i-1].pitch,sopFlow.get(i)),false);
+			}
 		}
 		for(int j = 0; j<sopranoLine.length; j++){
 			System.out.println(sopranoLine[j].pitch);
@@ -162,9 +264,6 @@ public class Verse {
 	
 	public void createAltoAndTenor(){
 		String[] notesUsed = new String[2];
-		for(int i = 0; i<2; i++){
-			
-		}
 		altoLine = new Note[trackRhythm.size()];
 		altoLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false);
 		tenorLine = new Note[trackRhythm.size()];
@@ -174,8 +273,15 @@ public class Verse {
 	public void createBass(){
 		bassLine = new Note[trackRhythm.size()];
 		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false,100,Note.defaultOctave-3);
-		for(int i = 1; i<trackRhythm.size(); i++){
-			bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false,100,Note.defaultOctave-3);
+		bassLine[bassLine.length-1] = new Note(trackRhythm.get(bassLine.length-1),pickNoteFromChord(I),false,100,Note.defaultOctave-3);
+		bassLine[bassLine.length-2] = new Note(trackRhythm.get(bassLine.length-2),pickNoteFromChord(V),false,100,Note.defaultOctave-3);
+		for(int i = 1; i<trackRhythm.size()-2; i++){
+			//bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false,100,Note.defaultOctave-3);
+			if(bassLine[i-1].pitch.equals(leadingTone)){
+				bassLine[i] = new Note(trackRhythm.get(i),I[0],false);
+			}else{
+				bassLine[i] = new Note(trackRhythm.get(i),chordProg[i][0],false,100,Note.defaultOctave-3);
+			}
 		}
 //		for(int i = 1; i<trackRhythm.size(); i++){
 //			bassLine[i] = new Note(trackRhythm.get(i),pickNotePitchBass(bassLine[i-1].pitch,bassFlow.get(i)),false);
@@ -285,6 +391,7 @@ public class Verse {
 		V = Song.chords[4];
 		vi = Song.chords[5];
 		vii = Song.chords[6];
+		leadingTone = vii[0];
 	}
 	
 	public Verse(int pNumMeasures, int pNumBeats){
