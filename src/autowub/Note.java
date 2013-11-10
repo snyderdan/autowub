@@ -33,6 +33,7 @@ public class Note {
 	public Note(double noteLength, String pitch, boolean perc, int velocity, int octave, boolean isDotted){
 		this(fromLength(noteLength), pitch, perc, velocity, octave);
 		this.isdotted = isDotted;
+//		System.out.println
 	}	
 	
 	public Note(NoteType type, String pitch, boolean perc, int velocity){
@@ -52,18 +53,16 @@ public class Note {
 	}
 	
 	public static NoteType fromLength(double length){
-		if(length == 1){
+		if(length >= 1){
 			return NoteType.WHOLE;
-		}else if(length == .5){
+		}else if(length >= .5){
 			return NoteType.HALF;
-		}else if(length == .25){
+		}else if(length >= .25){
 			return NoteType.QUARTER;
-		}else if(length == .125){
+		}else if(length >= .125){
 			return NoteType.EIGTH;
-		}else if(length == .0625){
+		}else {
 			return NoteType.SIXTEENTH;
-		}else{
-			return fromLength(length/1.5);
 		}
 	}
 	

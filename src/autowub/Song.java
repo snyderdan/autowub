@@ -151,7 +151,17 @@ public class Song {
 		Note[] perc = new Note[verse.percRhythm.size()];
 		double length = 0;
 		for(int i = 0; i< perc.length; i++){
-			perc[i] = new Note(verse.percRhythm.get(i), "c#", true, 60, 3, true);
+			boolean dotted = false;
+			
+			double notelength = 1;
+			for(int j = 0; j < NoteType.values().length; j++){
+				if (verse.percRhythm.get(i)/1.5 == notelength){
+					dotted = true;
+					break;
+				}
+				notelength /= 2;
+			}
+			perc[i] = new Note(verse.percRhythm.get(i), "c#", true, 60, 3, dotted);
 //			length += tracks[0].notes[i].noteLength() * .125;
 		}
 		tracks[2] = new NoteTrack(perc, 1);
