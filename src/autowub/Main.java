@@ -10,8 +10,9 @@ public class Main {
 			sr = new SongRenderer();
 			Song s = new Song();
 			System.out.println("Song generated");
-			s.bpm = 160;
+			s.bpm = 140;
 			System.out.println("Playing, len = " + sr.play(s));
+			sr.write(s);
 			while(sr.seqencer.isRunning()){
 				sr.seqencer.getMicrosecondPosition();
 				//System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());

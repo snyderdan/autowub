@@ -37,6 +37,7 @@ public class Verse {
 		createSoprano();
 		createChords();
 		createBass();
+		createPercussion();
 		for(int i = 0; i < trackRhythm.size(); i++){
 			System.out.println("Chord: " + chordProg[i][0] + chordProg[i][1] + chordProg[i][2] + " Soprano: " + sopranoLine[i].pitch + " Bass: " + bassLine[i].pitch);
 		}
@@ -288,9 +289,9 @@ public class Verse {
 	
 	public void createBass(){
 		bassLine = new Note[trackRhythm.size()];
-		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false,100,Note.defaultOctave-3);
-		bassLine[bassLine.length-1] = new Note(trackRhythm.get(bassLine.length-1),pickNoteFromChord(I),false,100,Note.defaultOctave-3);
-		bassLine[bassLine.length-2] = new Note(trackRhythm.get(bassLine.length-2),pickNoteFromChord(V),false,100,Note.defaultOctave-3);
+		bassLine[0] = new Note(trackRhythm.get(0),pickNoteFromChord(I),false,Note.defaultVelocity,Note.defaultOctave-3);
+		bassLine[bassLine.length-1] = new Note(trackRhythm.get(bassLine.length-1),pickNoteFromChord(I),false,Note.defaultVelocity,Note.defaultOctave-3);
+		bassLine[bassLine.length-2] = new Note(trackRhythm.get(bassLine.length-2),pickNoteFromChord(V),false,Note.defaultVelocity,Note.defaultOctave-3);
 		for(int i = 1; i<trackRhythm.size()-2; i++){
 			//bassLine[i] = new Note(trackRhythm.get(i),pickNoteFromChord(chordProg[i]),false,100,Note.defaultOctave-3);
 			if(bassLine[i-1].pitch.equals(leadingTone)){

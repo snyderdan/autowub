@@ -145,9 +145,14 @@ public class Song {
 			System.out.print("\n");
 		}
 		verse.create(key, keyIndex);
-		tracks = new NoteTrack[2];
-		tracks[0] = new NoteTrack(verse.sopranoLine, 3);
-		tracks[1] = new NoteTrack(verse.bassLine, 5);
+		tracks = new NoteTrack[3];
+		tracks[0] = new NoteTrack(verse.sopranoLine, 5);
+		tracks[1] = new NoteTrack(verse.bassLine, 15);
+		Note[] perc = new Note[verse.percRhythm.size()];
+		for(int i = 0; i< perc.length; i++){
+			perc[i] = new Note(verse.percRhythm.get(i), "c#", true, 100, 4);
+		}
+		tracks[2] = new NoteTrack(perc, 1);
 	}
 	
 	public static int getKeyIndex(String note){
