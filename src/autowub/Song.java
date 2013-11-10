@@ -33,8 +33,8 @@ public class Song {
 	
 	NoteTrack[] tracks;
 	public int bpm;
-	public int instrument = 84;
-	public int octave = 7;
+	public int[] instruments = {84};
+	public int octave = 6;
 
 	public double bass; //slightly arbitrary, might remove
 	

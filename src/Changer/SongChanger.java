@@ -10,16 +10,15 @@ public class SongChanger
 {
 	Scanner scan = new Scanner(System.in);
 	double tempo, bass;
-	int octave, instrument;
-	double[] values = {tempo, bass, octave, instrument};
-	//String[] songParts = {"tempo", "soprano", "alto", "tenor", "bass"};
+	int octave;
+	int[] instruments;
 	
 	public void recieveSong(Song song)
 	{
 		tempo = (double)song.bpm;
 		bass = song.bass;
 		octave = song.octave;
-		instrument = song.instrument;
+		instruments = song.instruments;
 	}
 	
 	public void changeSong(boolean useGui)
@@ -133,9 +132,9 @@ public class SongChanger
 		octave = octave + change;
 	}
 	
-	public void changeInstument(int change)
+	public void changeInstument(int[] change)
 	{
-		instrument = change;
+		instruments = change;
 	}
 	
 	public void createNewSong(Song song)
@@ -143,7 +142,7 @@ public class SongChanger
 		song.bpm = (int) tempo;
 		song.bass = bass;
 		song.octave = octave;
-		song.instrument = instrument;
+		song.instruments = instruments;
 	}
 	
 //	public Song leapMotionControl(Track track)

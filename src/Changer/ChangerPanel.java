@@ -16,7 +16,7 @@ public class ChangerPanel extends JPanel
 	private JButton change;
 	private JRadioButton upOctave, stayOctave, downOctave;
 	private JRadioButton instrument1, instrument2, instrument3;
-	private int inst = 1;
+	private int[] inst = {1, 1, 1};
 	private int octaveChange = 0;
 	
 	public ChangerPanel(SongChanger SChanger)
@@ -57,9 +57,9 @@ public class ChangerPanel extends JPanel
 		octavePanel.add(stayOctave);
 		octavePanel.add(downOctave);
 		
-		instrument1 = new JRadioButton("Inst #1", true);
-		instrument2 = new JRadioButton("Inst #2", false);
-		instrument3 = new JRadioButton("Inst #3", false);
+		instrument1 = new JRadioButton("Combo #1", true);
+		instrument2 = new JRadioButton("Combo #2", false);
+		instrument3 = new JRadioButton("Combo #3", false);
 		InstrumentListener instList = new InstrumentListener();
 		instrument1.addActionListener(instList);
 		instrument2.addActionListener(instList);
@@ -135,13 +135,13 @@ public class ChangerPanel extends JPanel
 		{
 			Object source = event.getSource();
 			if(source == instrument1)
-				inst = 84; //change to instrument signature
+				inst[0] = 1; //change to instrument number array
 			else
 			{
 				if(source == instrument2)
-					inst = 2;//change to instrument signature
+					inst[0] = 2;//change to instrument number array
 				else
-					inst = 3;//change to instrument signature
+					inst[0] = 3;//change to instrument number array
 			}
 		}
 	}
