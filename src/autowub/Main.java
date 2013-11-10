@@ -5,8 +5,9 @@ import javax.sound.midi.MidiUnavailableException;
 
 public class Main {
 	public static void main(String[] args){
+		SongRenderer sr = null;
 		try {
-			SongRenderer sr = new SongRenderer();
+			sr = new SongRenderer();
 //			Note[] soprano = new Note[Song.keys.length];
 //			Note[] alto = new Note[Song.keys.length];
 //			Note[] tenor = new Note[Song.keys.length];
@@ -25,21 +26,25 @@ public class Main {
 //					new NoteTrack(bass, 62),
 //				}, 180);
 			Song s = new Song();
-			s.bpm = 140;
-			System.out.println("Playing, len = " + sr.play(s));
-			System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
+			s.bpm = 160;
+//			System.out.println("Playing, len = " + sr.play(s));
+			sr.write(s);
+			sr.wait(30);
 			while(sr.seqencer.isRunning()){
-				sr.seqencer.getMicrosecondLength();//wts don't know why I need this
+				System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
+//				sr.seqencer.getMicrosecondPosition();//wts don't know why I need this
 			}
-			sr.write();
-			sr.seqencer.close();
-			System.out.println("Done");
+			
+			
 		} catch (MidiUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidMidiDataException e) {
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			sr.seqencer.close();
+			System.out.println("Done");
 		}
 	}
 }

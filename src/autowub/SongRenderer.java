@@ -1,7 +1,13 @@
 package autowub;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOError;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.sound.midi.Instrument;
@@ -40,15 +46,44 @@ public class SongRenderer {
 		return seq.getTracks()[0].ticks();
 	}
 	
-	public void write(){
-		Encoding ae = AudioFormat.Encoding.PCM_UNSIGNED;
-		int rate = 44100;//khz
-		int samplesize = 16;
-		int channels = 1;
-		boolean bigEndian = true;
-		AudioFormat fmt = new AudioFormat(ae, rate, samplesize, channels,(samplesize/8) * channels,rate ,bigEndian); 
-		File out = new File("out.pcm");
-//		out.
+	public void write(Song s){
+//		Encoding ae = AudioFormat.Encoding.PCM_UNSIGNED;
+//		int rate = 44100;//khz
+//		int samplesize = 16;
+//		int channels = 1;
+//		boolean bigEndian = true;
+//		AudioFormat fmt = new AudioFormat(ae, rate, samplesize, channels,(samplesize/8) * channels,rate ,bigEndian); 
+		File out = new File("test.midi");
+		try {
+			MidiSystem.write(s.getSequence(), 0, out);
+			String envp[] = new String[1];
+			envp[0] = "PATH=" + System.getProperty("java.library.path");
+			Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Ov -o out.ogg", envp);
+			Runtime.getRuntime().exec("timidity "+out.getName()+ " -T " + s.bpm + " -Or1ul -o out.raw", envp);
+			Runtime.getRuntime().exec("paplay out.ogg");
+			File raw = new File("out.raw");
+			FileReader fr = new  FileReader(raw);
+			Socket sock = new Socket(InetAddress.getByName("10.0.11.70"), 2345);
+			System.out.println("Streaming");
+			while(true){
+				try{
+					char[] sample = new char[2];
+					if(fr.read(sample, 0, sample.length) == -1){
+						break;
+					}
+					sock.getOutputStream().write(String.valueOf(sample).getBytes());
+					sock.getOutputStream().flush();
+				}catch (IOError e){
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Exiting");
+			sock.close();
+			fr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

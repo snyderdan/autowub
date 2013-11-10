@@ -23,7 +23,7 @@ public class NoteTrack {
 				timestamp += notes[i].noteLength();
 			}else{
 				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_ON, channel, notes[i].asMidi(), notes[i].velocity ), timestamp));
-				t.add(new MidiEvent(new ShortMessage(ShortMessage.CHANNEL_PRESSURE, channel, notes[i].asMidi(), 80 ), timestamp+1000*bpm/60));
+				t.add(new MidiEvent(new ShortMessage(ShortMessage.CHANNEL_PRESSURE, channel, notes[i].asMidi(), 80 ), timestamp+2));
 				timestamp += notes[i].noteLength();
 				t.add(new MidiEvent(new ShortMessage(ShortMessage.NOTE_OFF, channel, notes[i].asMidi(), notes[i].velocity ), timestamp));
 			}
