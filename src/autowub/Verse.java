@@ -38,6 +38,7 @@ public class Verse {
 	}
 	
 	public void createRhythm(){
+		fillTriads();
 		boolean upFlow = true;
 		Random randy = new Random();
 		for(int i = 0; i<numMeasures; i++){
@@ -57,7 +58,6 @@ public class Verse {
 	}
 	
 	public void createChords(){
-		fillTriads();
 		chordProg = new String[trackRhythm.size()][3];
 		chordProg[0] = I;
 		for(int i = 1; i<chordProg.length; i++){
