@@ -25,10 +25,11 @@ public class Main {
 //					new NoteTrack(bass, 62),
 //				}, 180);
 			Song s = new Song();
-			s.bpm = 180;
+			s.bpm = 140;
 			System.out.println("Playing, len = " + sr.play(s));
+			System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());
 			while(sr.seqencer.isRunning()){
-				System.out.println(sr.seqencer.getMicrosecondPosition() + " / " + sr.seqencer.getMicrosecondLength());//wts don't know why I need this
+				sr.seqencer.getMicrosecondLength();//wts don't know why I need this
 			}
 			sr.write();
 			sr.seqencer.close();
